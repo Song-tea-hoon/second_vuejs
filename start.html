@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/common.css">
     <script src="./assets/vue.js"></script>
     <title>Vue시작</title>
 </head>
@@ -48,6 +49,12 @@
         <input type="radio" v-model="result" v-on:click="showResult" id="chk1" v-bind:value="man">
         <label for="chk2">여자</label>
         <input type="radio" v-model="result" v-on:click="showResult" id="chk2" v-bind:value="woman">
+    </div>
+
+    <div id="app7">
+        <ol>
+            <todo-item></todo-item>
+        </ol>
     </div>
 </body>
 <script>
@@ -103,14 +110,14 @@
             }
         }
     })
-
+    //사용자 입력 핸들링
     var app6 = new Vue({
         el: '#app6',
         data: {
             message: '인픗에 값'
         }
     })
-
+    //사용자 입력 핸들링 추가
     var app6Ex = new Vue({
         el: '#app6-extand',
         data: {
@@ -136,5 +143,15 @@
             }
         }
     });
+
+    Vue.component('todo-item',{
+        template: '<li>할일 목록입니다. 할일 할일</li>'
+    })
+
+    var app7 = new Vue({
+        el: '#app7'
+    });
+
+    
 </script>
 </html>

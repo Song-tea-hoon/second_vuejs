@@ -1,0 +1,5 @@
+div[id^="app"]:not(:first-child) {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 2px solid #eee;
+}
