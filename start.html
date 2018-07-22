@@ -53,7 +53,21 @@
 
     <div id="app7">
         <ol>
-            <todo-item></todo-item>
+            <todo-item 
+                v-for="item in todos"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+            </todo-item>
+        </ol>
+    </div>
+
+    <div id="app7-extand">
+        <ol>
+            <todo-item-type2
+                v-for="item in todoItems"
+                v-bind:todo="item"
+                v-bind:key="item.id">
+            </todo-item-type2>
         </ol>
     </div>
 </body>
@@ -144,14 +158,40 @@
         }
     });
 
+    //컴포넌트
     Vue.component('todo-item',{
-        template: '<li>할일 목록입니다. 할일 할일</li>'
+        props:['todo'],
+        template: '<li>{{ todo.text }}</li>'
     })
 
     var app7 = new Vue({
-        el: '#app7'
+        el: '#app7',
+        data: {
+            todos: [
+                {id:0, text: 'doto1'},
+                {id:1, text: 'doto2'},
+                {id:2, text: 'doto3'}
+            ]
+        }
     });
 
+    //컴포넌트 추가
+    Vue.component('todo-item-type2',{
+        props:['todo'],
+        template: '<li>{{todo.name + "이 할 일은?? " +todo.text + " 입니다!"}}</li>'
+    });
     
+    var app7Ex = new Vue({
+        el: '#app7-extand',
+        data:{
+            todoItems:[
+                {id:0, text:'할일0', name:'송태훈'},
+                {id:1, text:'할일1', name:'송태흔'},
+                {id:2, text:'할일2', name:'송태헝'},
+                {id:3, text:'할일3', name:'송태헐'},
+                {id:4, text:'할일4', name:'송태헉'}
+            ]
+        }
+    })
 </script>
 </html>
