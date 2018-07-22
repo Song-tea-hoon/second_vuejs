@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./assets/vue.js"></script>
+    <title>Vue시작</title>
+</head>
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+
+    <div id="app2">
+        <span v-bind:title="message">
+            마우스는 올리면 동적으로 바인딩된 title을 보실 수 있습니다.
+        </span>
+    </div>
+
+    <div id="app3">
+        <p v-if="seen">보인다.</p>
+    </div>
+
+    <div id="app4">
+        <ol>
+            <li v-for="item in items">
+                {{ item.title }}
+            </li>
+        </ol>
+    </div>
+
+    <div id="app5">
+        <p v-bind:style="{ color : color }">{{ message }}</p>
+        <button v-on:click="reverseMessage">택스트 뒤집기</button>
+        <button v-on:click="colorRedOrBlack">색상 빨갛게 검게</button>
+    </div>
+
+    <div id="app6">
+        <p>{{ message }}</p>
+        <input v-model="message">
+    </div>
+
+    <div id="app6-extand">
+        <p v-if="seen">{{ message }}</p>
+        <p v-else>{{ result }}</p>
+        <label for="chk1">남자</label>
+        <input type="radio" v-model="result" v-on:click="showResult" id="chk1" v-bind:value="man">
+        <label for="chk2">여자</label>
+        <input type="radio" v-model="result" v-on:click="showResult" id="chk2" v-bind:value="woman">
+    </div>
+</body>
+<script>
+    //선언적 랜더링
+    var app = new Vue({
+        el: '#app',
+        data:{
+            message: 'Hello vue!'
+        }
+    })
+    //
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            message: '이 페이지는 ' + new Date() + '에 로드되었습니다.' 
+        }
+    })
+    //조건문
+    var app3 = new Vue({
+        el: '#app3',
+        data: {
+            seen: true
+        }
+    })
+    //반복분
+    var app4 = new Vue({
+        el: '#app4',
+        data:{
+            items: [
+                { title: 'title1' },
+                { title: 'title2' },
+                { title: 'title3' }
+            ]
+        }
+    })
+    //이벤트
+    var app5 = new Vue({
+        el: '#app5',
+        data: {
+            message: '이 메세지는 뒤집어 집니다. 또 빨개지기도하고 검어지기도 합니다.',
+            color: 'black'
+        },
+        methods: {
+            reverseMessage: function(){
+                this.message = this.message.split('').reverse().join('');
+            },
+            colorRedOrBlack: function(){
+                if( this.color === 'black' ){
+                    this.color = 'red';
+                }else{
+                    this.color = 'black';
+                }
+            }
+        }
+    })
+
+    var app6 = new Vue({
+        el: '#app6',
+        data: {
+            message: '인픗에 값'
+        }
+    })
+
+    var app6Ex = new Vue({
+        el: '#app6-extand',
+        data: {
+            message: '성별을 선택해 주세요~',
+            
+            manText: '남자',
+            
+            womanText: '여자',
+            result: '',
+            seen: true
+        },
+        computed:{
+            man: function(){
+                return this.manText + ' 를 택하셨습니다~!'
+            },
+            woman : function(){
+                return this.womanText + ' 를 택하셨습니다~!'
+            }
+        },
+        methods: {
+            showResult: function(){
+                this.seen = false;
+            }
+        }
+    });
+</script>
+</html>
