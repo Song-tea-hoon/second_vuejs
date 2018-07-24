@@ -6,20 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./assets/common.css">
     <script src="./assets/vue.js"></script>
-    <title>Vue시작</title>
+    <title>Vue</title>
 </head>
 <body>
-    <div id="app">
-        {{ message }}
+    <div id="app1">
+        <p>{{ foo }}</p>
+        <button v-on:click="foo = 'baz' ">Change it</button>
     </div>
+
+    <div id="example">인스턴스 및 메서드</div>
 </body>
 <script>
-    //선언적 랜더링
-    var app = new Vue({
-        el: '#app',
-        data:{
-            message: 'Hello vue!' 
-        }
-    })
+    //vue 인스턴스
+    var data = { a: 1 }
+
+    var vm = new Vue({
+        data: data
+    });
+
+    console.log( vm.a === data.a );
+    
+    //freeze
+    var obj = {
+        foo: 'bar'
+    }
+
+    Object.freeze(obj);
+    
+    var app1 = new Vue({
+        el: '#app1',
+        data: obj
+    });
+
+    //instance & method
+    var data1 = { a: 1 }
+    var vm1 = new Vue({
+        el: '#example',
+        data: data1
+    });
+
+    console.log( vm1.$data === data1 );
+    console.log( vm1.$el === document.getElementById('example'));
+    vm1.$watch('a', function(newVal, oldVal){
+        console.log(newVal, oldVal);
+    });
 </script>
 </html>
