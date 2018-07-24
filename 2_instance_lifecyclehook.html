@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/common.css">
+    <script src="./assets/vue.js"></script>
+    <title>인스턴스 라이프사이클 훅</title>
+</head>
+<body>
+    <div id="app1">
+        
+    </div>
+
+    <div id="example">인스턴스 및 메서드</div>
+</body>
+<script>
+    //vue 인스턴스
+    var vm = new Vue({
+        data: { a: 1 },
+        created: function(){
+            console.log("a is " + this.a);
+        }
+    });
+</script>
+</html>
