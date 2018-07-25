@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <script type="text/javascript" src="js/vue.js"></script>
+    <title>계산된 속성(computed)</title>
+</head>
+<body>
+    <div id="app1">
+        <p>{{ message.split('').reverse().jion('') }}</p>
+        <p>{{ reversedMessage }}</p>
+    </div>
+</body>
+<script>
+    //computed
+    var app1 = new Vue({
+        el: '#app1',
+        data:{
+            message: '뒤집습니다. 이것을 정말 놀립지 않습니까?'
+        },
+        computed: {
+            reversedMessage: function(){
+                this.message.split('').reverse().join('');
+            }
+        }
+    });
+</script>
+</html>
