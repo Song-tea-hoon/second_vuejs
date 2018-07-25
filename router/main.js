@@ -14,9 +14,11 @@ module.exports = function(app)
     });
     app.get('/interpolation',function(req,res){
         res.render('3_interpolation.html');
-    });//computed
-
+    });
     app.get('/computedVSWatch',function(req,res){
         res.render('4_computed_vs_watch.html');
+    });
+    app.get('/v-bind',function(req,res){
+        res.render('5_v-bind.html');
     });
 }

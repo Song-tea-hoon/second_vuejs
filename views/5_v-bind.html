@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <script type="text/javascript" src="js/vue.js"></script>
+    <title>v-bind</title>
+    <style>
+            #app1 > .active{border: 3px solid blue;}
+            #app1 > .text-danger{color: red;}
+        </style>
+</head>
+<body>
+    <div id="app1">
+        <div class="test" v-bind:class="{ active : isActive, 'text-danger': hasError }">class="acive"이면 글자가 테두리가 생깁니다. </br> class="text-danger"이면 글자가 빨갛게 변합니다.</div>
+        <br>
+        <div>
+            <span>class="active" : </span>
+            <input type="radio" name="classchk" id="classfalse" value="false" v-model="isActive">
+            <label for="classfalse">false</label>
+            <input type="radio" name="classchk" id="classtrue" value="true" v-model="isActive">
+            <label for="classtrue">true</label>
+        </div>
+        <div>
+            <span>class="text-danger" : </span>
+            <input type="radio" name="errchk" id="errfalse" value="false" v-model="hasError">
+            <label for="errfalse">false</label>
+            <input type="radio" name="errchk" id="errtrue" value="true" v-model="hasError">
+            <label for="errtrue">true</label>
+        </div>
+    </div>
+    
+</body>
+<script>
+    //computed
+    var app1 = new Vue({
+        el: '#app1',
+        data:{
+            isActive: false,
+            hasError: false
+        },
+        watch: {
+            isActive: function(val, newVal){
+                this.isActive = JSON.parse(val);
+            },
+            'hasError': function(val, newVal){
+                this.hasError = JSON.parse(val);
+            }
+        }
+    });    
+</script>
+</html>
