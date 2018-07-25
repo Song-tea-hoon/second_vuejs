@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <script type="text/javascript" src="js/vue.js"></script>
+    <title>계산된 속성(computed) / 감시된 속성(watch)</title>
+</head>
+<body>
+    <div id="app1">
+        <p>{{ message }}</p>
+        <p>{{ "템플릿 내의 표현식 - " + message.split('').reverse().join('') }}</p>
+        <p>{{ "computed - " + reversedMessage }}</p>
+        <input class="full" type="text" v-model="message">
+    </div>
+    <div id="app2">
+        <p>watch</p>
+        <p>{{ fullName }}</p>
+        <span>성</span><input v-model="firstName">
+        <span>이름</span><input v-model="lastName">
+    </div>
+    <div id="app3">
+        <p>computed</p>
+        <p>{{ fullName }}</p>
+        <span>성</span><input v-model="firstName">
+        <span>이름</span><input v-model="lastName">
+    </div>
+    <div id="app4">
+        <p>computed setter</p>
+        <span>{{ "성은 [" + firstName + "] 이름은 [" + lastName + "]"}}</span>
+        <p>
+            <input v-model="inputText" v-on:keyup.enter="changeFullName" placeholder="성을 넣은 뒤 한칸 띄우고 이름을 넣고 enter를 쳐보세요" class="full">
+        </p>
+    </div>
+</body>
+<script>
+    //computed
+    var app1 = new Vue({
+        el: '#app1',
+        data:{
+            message: '인풋에 값을 넣으면 텍스트가 뒤집힙니다~!'
+        },
+        computed: {
+            reversedMessage: function(){
+                return this.message.split('').reverse().join('');
+            }
+        }
+    });
+
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            firstName: '성',
+            lastName: '이름',
+            fullName: '성 이름',
+            inputText: ''
+        },
+        watch: {
+            firstName: function(val){
+                this.fullName = val + ' ' + this.lastName;
+            },
+            lastName: function(val){
+                this.fullName = this.firstName + ' ' + val
+            }
+        }
+    })
+
+    var app3 = new Vue({
+        el: '#app3',
+        data: {
+            firstName: '성',
+            lastName: '이름'
+        },
+        computed: {
+            fullName: function(){
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
+    })
+
+    var app4 = new Vue({
+        el: '#app4',
+        data: {
+            firstName: '성',
+            lastName: '이름',
+            inputText: ''
+        },
+        computed: {
+            fullName: {
+                get: function(){
+                    return this.firstName + ' ' + this.lastName;
+                },
+                set: function(val){
+                    var names = val.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length - 1];
+                }
+            }
+        },
+        methods: {
+            changeFullName: function(){
+                this.fullName = this.inputText;
+            }
+        }
+    })
+</script>
+</html>
