@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <script type="text/javascript" src="js/vue.js"></script>
+    <title>VueJs study</title>
+</head>
+<body>
+    <div id="app1">
+        <p>{{ title }}</p>
+        <ol>
+            <study-list 
+            v-for="listItem in studyList"
+            v-bind:item="listItem"
+            v-bind:key="listItem.id"
+            ></study-list>
+        </ol>
+    </div>
+</body>
+<script>
+    
+    var data = [
+        {id:0, title: '시작', href: '/start'},
+        {id:1, title: '인스턴스', href: '/instance'},
+        {id:2, title: '인스턴스 라이프사이클', href: '/instance_lifecyclehook'},
+        {id:3, title: '인터폴레이션', href: 'interpolation'},
+    ];
+
+    Vue.component('study-list',{
+        props: ['item'],
+        template: '<li><a v-bind:href="item.href">{{ item.title }}</a></li>'
+    })
+
+    var vm = new Vue({
+        el: '#app1',
+        data: {
+            title: 'vuejs 목차',
+            studyList: data
+        }
+    });
+</script>
+</html>
