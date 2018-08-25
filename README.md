@@ -1,5 +1,5 @@
 # vueJS2.0 스터디 
-> test 환경은 node.js express기반으로 동작한다.
+test 환경은 node.js express기반으로 동작한다.
 ## 테스트 방법
 > 현재 git을 clone받은 뒤 ```npm install``` 실행 
 
